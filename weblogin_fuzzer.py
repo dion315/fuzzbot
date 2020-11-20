@@ -3,7 +3,7 @@ import os
 import random
 import string
 import requests
-from art import *
+from art import tprint
 
 print('-'*80)   
 tprint('Welcome to Fuzzbot!', font='random')
@@ -18,6 +18,11 @@ adddomain_switch = input('Does the username require a randomized eMail domain? (
 email_domain = input('If all emails should come from a common domain please enter it now, or leave blank for none: ')
 send_limit = int(input('Please enter a number of fuzzing attempts to execute, enter 0 to run continuously: '))
 
+def get_random_string(length):
+    letters = string.ascii_lowercase
+    result_str = ''.join(random.choice(letters) for i in range(length))
+    return result_str
+    
 while send_limit == send_limit :
     if firstinitial_switch == 'y':
         lower_upper_alphabet = string.ascii_letters
@@ -48,16 +53,11 @@ while send_limit == send_limit :
     else:
         pass
     
-    password = ''.join(random.choice(chars) for i in range(16))
+    password = get_random_string(16)
     
     payload = {user_argument:username+email_domain, pass_argument:password}
     r = requests.post(url, allow_redirects=False, data=payload)
     print ('Sending username %s%s and password %s' % (username, email_domain, password))
     send_limit -= 1
     if send_limit == 0:
-        break
-
-
-
-                    
-                      
+        break                   
