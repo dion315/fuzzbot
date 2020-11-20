@@ -15,20 +15,21 @@ Constructive criticism always welcome! dion315@gmail.com
 <hr>
 
 Usage:
-Open Chrome (This can be done in other browsers as well, I prefer Chrome but instructions for other browsers will be similar)
-Press F12 to open developer console.
-Select the Network tab, and be sure Preserve Log is checked.
-If Preserve Log is not present, click the gear icon in settings and check the Preserve Log box under Network.
-Navigate to the login page you wish to target.
-Attempt to log in with bad creds (ex. User: test, Pass: test)
-You will now have to do some digging. If the login page is a PHP form for example, you can look at the PHP files. If it's HTML you might find an html file or something as simple as a document called login. Click on these and look at the header information for form data (usually on the bottom of the header info).
+<ol>
+  <li>Open Chrome (This can be done in other browsers as well, I prefer Chrome but instructions for other browsers will be similar)
+  <li>Press F12 to open developer console.
+  <li>Select the Network tab, and be sure Preserve Log is checked. If Preserve Log is not present, click the gear icon in settings and check the Preserve Log box under Network.
+  <li>Navigate to the login page you wish to target.
+  <li>Attempt to log in with bad creds (ex. User: test, Pass: test)
+  <li>You will now have to do some digging. If the login page is a PHP form for example, you can look at the PHP files. If it's HTML you might find an html file or something as    simple as a document called login. Click on these and look at the header information for form data (usually on the bottom of the header info).
 
 It should look something like this:
-url: http://www.some*website*.com
+```
+url: http://www.somewebsite.com/login
 user: test
 pass: test
-
-Now execute python weblogin_fuzzer.py
-Enter the URL from the form data exactly as it appeared.
-Enter the arguments used to pass the username and password. You'll know them because we used test as our username and password so we could identify the arguments user for username, and pass for password. You don't need to enter the : just the names of the arguments.
-Answer a few more basic configuration questions and you're off! Easy!
+```
+<li>Now execute python weblogin_fuzzer.py
+<li>Enter the full URL from the form data *exactly* as it appeared. Omitting the http or https, or any trailing data will prevent this from working.
+<li>Enter the arguments used to pass the username and password. You'll know them because we used test as our username and password so we could identify the arguments user for username, and pass for password. You don't need to enter the : just the names of the arguments.
+<li>Answer a few more basic configuration questions and you're off! Easy!
